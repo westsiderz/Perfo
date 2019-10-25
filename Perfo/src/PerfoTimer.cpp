@@ -12,32 +12,32 @@ void PerfoTimer::stopTimer()
 	mTimerEndPoint = std::chrono::high_resolution_clock::now();
 }
 
-long long PerfoTimer::getTimerResultSeconds()
+double PerfoTimer::getTimerResultSeconds()
 {
 	if (isTimerFinished())
 	{
-		std::chrono::duration<std::chrono::seconds> lTimeSpan = 
-			std::chrono::duration_cast<std::chrono::seconds>(mTimerEndPoint - mTimerStartPoint);
+		std::chrono::duration<double> lTimeSpan = 
+			std::chrono::duration_cast<std::chrono::duration<double>>(mTimerEndPoint - mTimerStartPoint);
 
-		return lTimeSpan.count().count();
+		return lTimeSpan.count();
 	}
 	else
 	{
-		return 0;
+		return 0.0;
 	}
 }
 
-long long PerfoTimer::getTimerResultMilliseconds()
+double PerfoTimer::getTimerResultMilliseconds()
 {
 	return getTimerResultSeconds() * cSecondsToMillisecondsRate;
 }
 
-long long PerfoTimer::getTimerResultMicroseconds()
+double PerfoTimer::getTimerResultMicroseconds()
 {
 	return getTimerResultSeconds() * cSecondsToMicrosecondsRate;
 }
 
 bool XQ::Perfo::PerfoTimer::isTimerFinished()
 {
-	return (mTimerStartPoint.time_since_epoch().count > 0 && mTimerEndPoint.time_since_epoch().count);
+	return (mTimerStartPoint.time_since_epoch().count() > 0 && mTimerEndPoint.time_since_epoch().count() > 0);
 }

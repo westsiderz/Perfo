@@ -12,16 +12,16 @@ namespace XQ
 		public:
 			void startTimer();
 			void stopTimer();
-			long long getTimerResultSeconds();
-			long long getTimerResultMilliseconds();
-			long long getTimerResultMicroseconds();
+			double getTimerResultSeconds();
+			double getTimerResultMilliseconds();
+			double getTimerResultMicroseconds();
 
 		private:
 			bool isTimerFinished();
 
 		private:
-			static constexpr const int cSecondsToMillisecondsRate = 1000;
-			static constexpr const int cSecondsToMicrosecondsRate = 1000000;
+			static constexpr const double cSecondsToMillisecondsRate = 1000.0;
+			static constexpr const double cSecondsToMicrosecondsRate = 1000000.0;
 			std::chrono::high_resolution_clock::time_point mTimerStartPoint;
 			std::chrono::high_resolution_clock::time_point mTimerEndPoint;
 		};

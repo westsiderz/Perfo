@@ -13,13 +13,20 @@ namespace XQ
 			template<typename Method>
 			void executeTask(Method aMethodToExecute);
 
+			double getExecutionDuration();
+
 		private:
 			PerfoTimer mPerformanceTimer;
+			double mTaskExecutionDuration{ 0 };
 		};
 
 		template<typename Method>
 		inline void Perfo::executeTask(Method aMethodToExecute)
 		{
+			mPerformanceTimer.startTimer();
+			aMethodToExecute();
+			mPerformanceTimer.stopTimer();
+			mTaskExecutionDuration = mPerformanceTimer.getTimerResultMilliseconds();
 		}
 	}
 }
