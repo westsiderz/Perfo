@@ -20,8 +20,6 @@ namespace XQ
 			bool isTimerFinished();
 
 		private:
-			static constexpr const double cSecondsToMillisecondsRate = 1000.0;
-			static constexpr const double cSecondsToMicrosecondsRate = 1000000.0;
 			std::chrono::high_resolution_clock::time_point mTimerStartPoint;
 			std::chrono::high_resolution_clock::time_point mTimerEndPoint;
 		};

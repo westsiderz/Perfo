@@ -13,7 +13,9 @@ namespace XQ
 			template<typename Method>
 			void executeTask(Method aMethodToExecute);
 
-			double getExecutionDuration();
+			double getExecutionDurationSeconds();
+			double getExecutionDurationMilliseconds();
+			double getExecutionDurationMicroseconds();
 
 		private:
 			PerfoTimer mPerformanceTimer;
@@ -26,7 +28,7 @@ namespace XQ
 			mPerformanceTimer.startTimer();
 			aMethodToExecute();
 			mPerformanceTimer.stopTimer();
-			mTaskExecutionDuration = mPerformanceTimer.getTimerResultMilliseconds();
+			mTaskExecutionDuration = mPerformanceTimer.getTimerResultSeconds();
 		}
 	}
 }

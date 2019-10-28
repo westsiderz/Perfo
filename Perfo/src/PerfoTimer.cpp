@@ -1,4 +1,5 @@
 #include "PerfoTimer.hpp"
+#include "CommonDefinitions.hpp"
 
 using namespace XQ::Perfo;
 
