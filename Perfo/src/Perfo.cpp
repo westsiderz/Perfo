@@ -3,6 +3,11 @@
 
 using namespace XQ::Perfo;
 
+void XQ::Perfo::Perfo::waitForMs(int aMilliseconds)
+{
+	mPerformanceTimer.sleepForMs(aMilliseconds);
+}
+
 double Perfo::getExecutionDurationSeconds()
 {
 	return mTaskExecutionDuration;

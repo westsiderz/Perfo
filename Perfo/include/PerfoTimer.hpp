@@ -12,6 +12,7 @@ namespace XQ
 		public:
 			void startTimer();
 			void stopTimer();
+			void sleepForMs(int aMilliseconds);
 			double getTimerResultSeconds();
 			double getTimerResultMilliseconds();
 			double getTimerResultMicroseconds();

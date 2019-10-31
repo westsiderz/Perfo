@@ -1,5 +1,6 @@
 #include "PerfoTimer.hpp"
 #include "CommonDefinitions.hpp"
+#include <thread>
 
 using namespace XQ::Perfo;
 
@@ -11,6 +12,11 @@ void PerfoTimer::startTimer()
 void PerfoTimer::stopTimer()
 {
 	mTimerEndPoint = std::chrono::high_resolution_clock::now();
+}
+
+void XQ::Perfo::PerfoTimer::sleepForMs(int aMilliseconds)
+{
+	std::this_thread::sleep_for(std::chrono::milliseconds(aMilliseconds));
 }
 
 double PerfoTimer::getTimerResultSeconds()

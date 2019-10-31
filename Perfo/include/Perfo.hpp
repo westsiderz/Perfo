@@ -13,6 +13,7 @@ namespace XQ
 			template<typename Method>
 			void executeTask(Method aMethodToExecute);
 
+			void waitForMs(int aMilliseconds);
 			double getExecutionDurationSeconds();
 			double getExecutionDurationMilliseconds();
 			double getExecutionDurationMicroseconds();
