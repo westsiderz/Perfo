@@ -1,48 +1,64 @@
 #include "TestingDoDPerformance.hpp"
-#include <random>
 
-void XQ::Perfo::PerfoTestz::fillDataNoDoD()
+void XQ::Perfo::PerfoTestz::DoDPerformanceTest::fillDataNoDoD()
 {
-	for (size_t iNodesCount = 0; iNodesCount < cRandomNodesCount; ++iNodesCount)
+	mNodesNoDoD.positions.clear();
+	mNodesNoDoD.color.clear();
+	mNodesNoDoD.indexes.clear();
+
+	for (size_t iNodesCount = 0; iNodesCount < mNodesCount; ++iNodesCount)
 	{
-		mNodesNoDoD.positions.emplace_back(PosInfo{ {rand(), rand(), rand()}, {rand(), rand(), rand()} });
+		mNodesNoDoD.positions.emplace_back(PosInfo{});
+		mNodesNoDoD.color.emplace_back(0.1f);
+		mNodesNoDoD.indexes.emplace_back(1);
 	}
 }
 
-void XQ::Perfo::PerfoTestz::processNodesNoDoD()
+void XQ::Perfo::PerfoTestz::DoDPerformanceTest::processNodesNoDoD()
 {
-	for (size_t iTimes = 0; iTimes < cProcessTrialsCount; ++iTimes)
+	for (size_t iTimes = 0; iTimes < mProcessTrialsCount; ++iTimes)
 	{
 		std::vector<PosInfo>& lPosInfoVector = mNodesNoDoD.positions;
-		for (size_t iNodesCount = 0; iNodesCount < cRandomNodesCount; ++iNodesCount)
+		for (size_t iNodesCount = 0; iNodesCount < mNodesCount; ++iNodesCount)
 		{
-			for (size_t iPositionIndex = 0; iPositionIndex < 3; ++iPositionIndex)
-			{
-				lPosInfoVector.at(iNodesCount).position.at(iPositionIndex) += lPosInfoVector.at(iNodesCount).velocity.at(iPositionIndex) * rand();
-			}
+			lPosInfoVector.at(iNodesCount).position += lPosInfoVector.at(iNodesCount).velocity * 1.1f;
 		}
 	}
 }
 
-void XQ::Perfo::PerfoTestz::fillDataDoD()
+void XQ::Perfo::PerfoTestz::DoDPerformanceTest::fillDataDoD()
 {
-	for (size_t iNodesCount = 0; iNodesCount < cRandomNodesCount; ++iNodesCount)
+	mNodesDoD.positions.clear();
+	mNodesDoD.velocities.clear();
+	mNodesDoD.color.clear();
+	mNodesDoD.indexes.clear();
+
+	for (size_t iNodesCount = 0; iNodesCount < mNodesCount; ++iNodesCount)
 	{
-		mNodesDoD.positions.emplace_back(std::vector<int>{rand(), rand(), rand()});
-		mNodesDoD.velocities.emplace_back(std::vector<int>{rand(), rand(), rand()});
+		mNodesDoD.positions.emplace_back(1.2f);
+		mNodesDoD.velocities.emplace_back(3.4f);
+		mNodesDoD.color.emplace_back(0.1f);
+		mNodesDoD.indexes.emplace_back(1);
 	}
 }
 
-void XQ::Perfo::PerfoTestz::processNodesDoD()
+void XQ::Perfo::PerfoTestz::DoDPerformanceTest::processNodesDoD()
 {
-	for (size_t iTimes = 0; iTimes < cProcessTrialsCount; ++iTimes)
+	for (size_t iTimes = 0; iTimes < mProcessTrialsCount; ++iTimes)
 	{
-		for (size_t iNodesCount = 0; iNodesCount < cRandomNodesCount; ++iNodesCount)
+		for (size_t iNodesCount = 0; iNodesCount < mNodesCount; ++iNodesCount)
 		{
-			for (size_t iPositionIndex = 0; iPositionIndex < 3; ++iPositionIndex)
-			{
-				mNodesDoD.positions.at(iNodesCount).at(iPositionIndex) += mNodesDoD.velocities.at(iNodesCount).at(iPositionIndex) * rand();
-			}
+			mNodesDoD.positions.at(iNodesCount) += mNodesDoD.velocities.at(iNodesCount) * 1.1f;
 		}
 	}
+}
+
+void XQ::Perfo::PerfoTestz::DoDPerformanceTest::setProcessTrialsCount(size_t aTrialsCount)
+{
+	mProcessTrialsCount = aTrialsCount;
+}
+
+void XQ::Perfo::PerfoTestz::DoDPerformanceTest::setNodesCount(size_t aNodesCount)
+{
+	mNodesCount = aNodesCount;
 }

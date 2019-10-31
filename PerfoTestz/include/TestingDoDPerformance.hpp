@@ -1,3 +1,9 @@
+/*
+*	This performance tests is testing DoD approach performance.
+*	The test idea is taken from here:
+*	http://www.dataorienteddesign.com/dodbook/node9.html#SECTION00940000000000000000
+*/
+
 #ifndef XQ_PERFO_PERFO_TESTZ_TESTING_DOD_PERFORMANCE
 #define XQ_PERFO_PERFO_TESTZ_TESTING_DOD_PERFORMANCE
 
@@ -11,8 +17,11 @@ namespace XQ
 
 			struct PosInfo
 			{
-				std::vector<int> position;
-				std::vector<int> velocity;
+				float position;
+				float velocity;
+				PosInfo() :
+					position{ 1.2f },
+					velocity{ 3.4f }{}
 				
 			};
 
@@ -25,21 +34,28 @@ namespace XQ
 
 			struct NodeDoD
 			{
-				std::vector< std::vector<int> > positions;
-				std::vector< std::vector<int> > velocities;
+				std::vector< float > positions;
+				std::vector< float > velocities;
 				std::vector<float> color;
 				std::vector<int> indexes;
 			};
 
-			static constexpr const size_t cProcessTrialsCount = 1000;
-			static constexpr const size_t cRandomNodesCount = 1000;
-			static NodeNoDoD mNodesNoDoD;
-			static NodeDoD mNodesDoD;
+			class DoDPerformanceTest 
+			{	
+			public:
+				void fillDataNoDoD();
+				void processNodesNoDoD();
+				void fillDataDoD();
+				void processNodesDoD();
+				void setProcessTrialsCount(size_t aTrialsCount);
+				void setNodesCount(size_t aNodesCount);
 
-			void fillDataNoDoD();
-			void processNodesNoDoD();
-			void fillDataDoD();
-			void processNodesDoD();
+			private:
+				size_t mProcessTrialsCount = 100;
+				size_t mNodesCount = 100;
+				NodeNoDoD mNodesNoDoD;
+				NodeDoD mNodesDoD;
+			};
 		}
 	}
 }
